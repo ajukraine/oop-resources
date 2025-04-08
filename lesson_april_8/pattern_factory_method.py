@@ -35,6 +35,10 @@ class LabFactory:
         return NoLab()
 
 
-lab = LabFactory.create_lab(LabType.LAB3)
+lab_a = LabFactory.create_lab(LabType.LAB2)
+lab_b = LabFactory.create_lab(LabType.LAB2)
+lab_c = LabFactory.create_lab(LabType.LAB2)
 
-print(type(lab))
+print(type(lab_a))
+print(type(lab_b))
+print(type(lab_c))
