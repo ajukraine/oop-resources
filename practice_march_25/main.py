@@ -1,13 +1,21 @@
 from abc import ABC, abstractmethod
 import random
+from typing import Protocol, runtime_checkable
 
 
 class AccountingException(Exception):
   pass
 
 
+@runtime_checkable
+class CreditDeposit(Protocol):
+  def credit(self, amount) -> None: ...
+  def deposit(self, amount) -> None: ...
+
+
 class Transaction(ABC):
-  def __init__(self, account, type):
+  def __init__(self, account: CreditDeposit, type):
+    print(f"Account balance: {account.balance()}")
     self._account = account
     self._type = type
 
@@ -16,7 +24,7 @@ class Transaction(ABC):
     pass
 
   def __str__(self):
-    return f"Transaction type: {self._type}"
+    return f"Transaction type: {self._type}, Account balance: {self._account.balance()}"
 
 
 class SalaryTransaction(Transaction):
@@ -35,7 +43,7 @@ class PaymentTransaction(Transaction):
     self._account.credit(amount)
 
 
-class Account(ABC):
+class Account(ABC, CreditDeposit):
   def __init__(self, accountNumber):
     self._balance = 0
     self._number = accountNumber
@@ -100,6 +108,7 @@ interestTransaction = InterestTransaction(depositAccount)
 interestTransaction.execute(100)
 
 print(f"Balance: {depositAccount.balance()}")
+print(interestTransaction)
 
 # account = savingsAccount
 #
