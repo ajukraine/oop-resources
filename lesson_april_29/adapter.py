@@ -18,7 +18,7 @@ class GithubAccount:
     print("Account entered the Github")
 
 
-class WebAccountAdapterForGoogle:
+class UserAdapterForGoogle:
   def __init__(self, google_account):
     self.google_account = google_account
 
@@ -26,7 +26,7 @@ class WebAccountAdapterForGoogle:
     self.google_account.login()
 
 
-class WebAccountAdapterForGithub:
+class UserAdapterForGithub:
   def __init__(self, github_account):
     self.github_account = github_account
 
@@ -41,5 +41,5 @@ github = GithubAccount()
 github.enter()
 
 provider = WebAccountProvider()
-provider.authorize(WebAccountAdapterForGoogle(google))
-provider.authorize(WebAccountAdapterForGithub(github))
+provider.authorize(UserAdapterForGoogle(google))
+provider.authorize(UserAdapterForGithub(github))
